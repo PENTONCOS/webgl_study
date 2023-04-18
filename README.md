@@ -1,6 +1,9 @@
 ## 笔记
 
 ### shader传值的三种方式
+
+![](./imgs/1.png)
+
 1. Attribute (vertexShader): 将js中的数据传给vertexShader
 ```js
 let a_position = gl.getAttribLocation(gl.program, "a_position");
@@ -17,3 +20,4 @@ gl.uniform1f(u_size, 30.0)
 ```
 
 3. Varying: 将vertexShader中的数据传给fragmentShader
+
