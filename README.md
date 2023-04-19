@@ -5,7 +5,6 @@
 ![](./imgs/1.png)
 
 
-
 1. Attribute (vertexShader): 将js中的数据传给vertexShader
 ```js
 let a_position = gl.getAttribLocation(gl.program, "a_position");
