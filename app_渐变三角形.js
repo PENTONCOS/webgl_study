@@ -69,5 +69,4 @@ gl.vertexAttribPointer(
 gl.enableVertexAttribArray(a_position)
 gl.enableVertexAttribArray(a_color)
 
-// 画图
 gl.drawArrays(gl.TRIANGLES, 0, 3)

@@ -21,8 +21,8 @@ gl.uniform1f(u_size, 30.0)
 
 ### 3. Varying: 将vertexShader中的数据传给fragmentShader
 
-## buffer
-表示存储一组点位信息的数组
+## buffer: 表示存储一组点位信息的数组
+
 
 创建buffer信息数组，有5个步骤：
 ```js
