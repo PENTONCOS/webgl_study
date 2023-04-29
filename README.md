@@ -2,7 +2,7 @@
 
 ## shader传值的三种方式
 
-![](./imgs/1.png)
+![](./imgs/shader传值方式.png)
 
 ### 1. Attribute (vertexShader): 将js中的数据传给vertexShader
 ```js
@@ -54,3 +54,14 @@ gl.vertexAttribPointer(
 // 5. 确认把带有数据的buffer赋值给attribute
 gl.enableVertexAttribArray(a_position)
 ```
+
+## webgl的7种基本形状
+- 点 1种
+- 线 3种
+- 面（三角形） 3种
+
+所有的三维图形都是由三角形构成的。
+
+![](./imgs/webgl的7种基本形状.png)
+
+
