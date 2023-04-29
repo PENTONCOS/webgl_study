@@ -56,12 +56,21 @@ gl.enableVertexAttribArray(a_position)
 ```
 
 ## webgl的7种基本形状
-- 点 1种
+- 点 1种  
+  - gl.POINTS
 - 线 3种
+  - gl.LINES
+  - gl.LINE_STRIP
+  - gl.LINE_LOOP
 - 面（三角形） 3种
+  - gl.TRIANGLES
+  - gl.TRIANGLE_STRIP
+  - gl.TRIANGLE_FAN
 
-所有的三维图形都是由三角形构成的。
+三角形可以构成任何一个图形，所有的三维图形也是由三角形构成的。
 
 ![](./imgs/webgl的7种基本形状.png)
+
+
 
 
