@@ -76,10 +76,67 @@ gl.enableVertexAttribArray(a_position)
 
 ## 三种变换（通过变换矩阵）
 
-- 平移：translate
-- 旋转：rotate
-- 缩放：scale
+```js
+/**
+ * 变换：平移translate、旋转rotate、缩放scale
+ */
+
+// 以下是数学上的矩阵
+// ***** 平移矩阵 ******
+// [
+//     1, 0, 0, Tx,
+//     0, 1, 0, Ty,
+//     0, 0, 1, Tz,
+//     0, 0, 0, 1,
+// ]
+
+// ****** 旋转矩阵 ******
+// [
+//     cosB, -sinB, 0, 0,
+//     sinB, cosB,  0, 0,
+//     0,    0,     1, 0,
+//     0,    0,     0, 1,
+// ]
+
+// ****** 缩放矩阵 ******
+// [
+//     Sx, 0,  0,  0,
+//     0,  Sy, 0,  0,
+//     0,  0,  Sz, 0,
+//     0,  0,  0,  1,
+// ]
+```
 
 ![变换矩阵](./imgs/变换矩阵.png)
 
-实际使用是调用库来解决。
+**传入webgl时，需要讲变换矩阵进行转置！！！**
+
+```js
+// 缩放
+let Sx = 1, Sy = 1, Sz = 1
+let scale_matrix = [
+    Sx, 0, 0, 0,
+    0, Sy, 0, 0,
+    0, 0, Sz, 0,
+    0, 0, 0, 1,
+]
+
+// 平移
+let Tx = 0, Ty = 0, Tz = 0
+let translate_matrix = [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    Tx, Ty, Tz, 1
+]
+
+// 旋转
+let deg = 0
+let cos = Math.cos(deg / 180 * Math.PI), sin = Math.sin(deg / 180 * Math.PI)
+let rotate_matrix = [
+    cos, sin, 0, 0,
+    -sin, cos, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1,
+]
+```
