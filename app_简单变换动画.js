@@ -6,32 +6,15 @@ let gl = canvas.getContext('webgl')
 // vertex shader
 let vertexShader = `
 attribute vec2 a_position;
-uniform float cosB;
-uniform float sinB;
+uniform vec4 u_translate;
 
 void main() {
-    float x1 = a_position.x;
-    float y1 = a_position.y;
-    float z1 = 0.0;
-
-    float x2 = x1*cosB - y1*sinB;
-    float y2 = x1*sinB + y1*cosB;
-    float z2 = z1;
-
-    gl_Position = vec4(x2, y2, z2, 1.0);
+    gl_Position = vec4(a_position, 0.0, 1.0) + u_translate;
     gl_PointSize = 10.0;
 }
 `
 /**
  * 变换：平移translate、旋转rotate、缩放scale
- */
-/**
- * [x1, y1, z1] 为旧坐标
- * [x2, y2, z2] 为（旋转）变换后的新坐标
- * 
- * x2 = x1*cosB - y1*sinB
- * y2 = x1*sinB + y1*cosB
- * z2 = z2
  */
 
 // fragment shader
@@ -90,22 +73,20 @@ function draw(gl) {
   gl.drawArrays(gl.TRIANGLE_FAN, 0, n)
 }
 
+let tx = 0, ty = 0
+let speed_x = 0.01, speed_y = 0.02
 
-/**
- * 动画
-*/
-let deg = 0  //旋转角度
-
-tick()
 function tick() {
-  deg += 0.5
+  tx += speed_x
+  ty += speed_y
+  if (tx > 0.5 || tx < -0.5) speed_x *= -1
+  if (ty > 0.5 || ty < -0.5) speed_y *= -1
 
-  let sinB = gl.getUniformLocation(gl.program, 'sinB')
-  let cosB = gl.getUniformLocation(gl.program, 'cosB')
-  gl.uniform1f(sinB, Math.sin(deg / 180 * Math.PI))
-  gl.uniform1f(cosB, Math.cos(deg / 180 * Math.PI))
+  let u_translate = gl.getUniformLocation(gl.program, 'u_translate')
+  gl.uniform4f(u_translate, tx, ty, 0.0, 0.0)
 
   draw(gl)
 
   requestAnimationFrame(tick)
 }
+tick()

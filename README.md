@@ -2,15 +2,17 @@
 
 ## shader传值的三种方式
 
-![](./imgs/shader传值方式.png)
+![shader传值方式](./imgs/shader传值方式.png)
 
 ### 1. Attribute (vertexShader): 将js中的数据传给vertexShader
+
 ```js
 let a_position = gl.getAttribLocation(gl.program, "a_position");
 gl.vertexAttrib2f(a_position, -0.5, 0.5)
 ```
 
 ### 2. Uniform (vertexShader/fragmentShader): 将js中的数据传给vertexShader/fragmentShader
+
 ```js
 let u_color = gl.getUniformLocation(gl.program, "u_color");
 gl.uniform3f(u_color, 0.0, 1.0, 0.0)
@@ -23,8 +25,8 @@ gl.uniform1f(u_size, 30.0)
 
 ## buffer: 表示存储一组点位信息的数组
 
-
 创建buffer信息数组，有5个步骤：
+
 ```js
 let vertices = [
   // x    y      r    g   b
@@ -56,6 +58,7 @@ gl.enableVertexAttribArray(a_position)
 ```
 
 ## webgl的7种基本形状
+
 - 点 1种  
   - gl.POINTS
 - 线 3种
@@ -69,8 +72,14 @@ gl.enableVertexAttribArray(a_position)
 
 三角形可以构成任何一个图形，所有的三维图形也是由三角形构成的。
 
-![](./imgs/webgl的7种基本形状.png)
+![webgl的7种基本形状](./imgs/webgl的7种基本形状.png)
 
+## 三种变换（通过变换矩阵）
 
+- 平移：translate
+- 旋转：rotate
+- 缩放：scale
 
+![变换矩阵](./imgs/变换矩阵.png)
 
+实际使用是调用库来解决。
