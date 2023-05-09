@@ -1,4 +1,7 @@
 import initShaders from './initShaders.js'
+import { mat4, glMatrix } from './gl_matrix/esm/index.js'
+
+console.log(mat4)
 
 let canvas = document.getElementById('webgl')
 let gl = canvas.getContext('webgl')
