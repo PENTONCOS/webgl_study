@@ -107,7 +107,7 @@ let rotate_matrix = mat4.create()
 
 // mat4.fromRotation(rotate_matrix, 10 / 180 * Math.PI, [0, 0, 1])
 // mat4.fromXRotation(rotate_matrix, 40 / 180 * Math.PI)
-// mat4.fromRRotation(rotate_matrix, 40 / 180 * Math.PI)
+// mat4.fromYRotation(rotate_matrix, 40 / 180 * Math.PI)
 // mat4.fromZRotation(rotate_matrix, 40 / 180 * Math.PI)
 
 // 表示10°，转成10弧度

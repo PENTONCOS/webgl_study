@@ -74,7 +74,7 @@ gl.enableVertexAttribArray(a_position)
 
 ![webgl的7种基本形状](./imgs/webgl的7种基本形状.png)
 
-## 三种变换（通过变换矩阵）
+## 三种变换动画（通过变换矩阵）
 
 ```js
 /**
@@ -140,3 +140,42 @@ let rotate_matrix = [
     0, 0, 0, 1,
 ]
 ```
+
+## glMatrix库的使用
+
+官方网站：https://glmatrix.net/
+
+### 引入
+
+```js
+import { mat4, glMatrix } from './gl_matrix/esm/index.js'
+
+
+// 第二种方式：修改某个矩阵，生成另外一个新的矩阵
+
+```
+
+### 使用
+- 方式一：对原有的（单位）矩阵进行修改
+
+```js
+// 创建一个新的单位矩阵
+let matrix = mat4.create()
+
+mat4.fromScaling(matrix, [Sx, Sy, Sz])
+mat4.fromTranslation(matrix, [Tx, Ty, Tz])
+mat4.fromRotation(matrix, deg, [X, Y, Z])
+```
+
+- 方式二：修改某个矩阵，生成另外一个新的矩阵
+
+```js
+// matrix1旧矩阵，matrix2新矩阵
+let matrix1 = mat4.create()
+let matrix2 = mat4.create()
+
+mat4.scale(matrix2, matrix1, [Sx, Sy, Sz])
+mat4.rotate(matrix2, matrix1, matrix, deg, [X, Y, Z])
+mat4.translate(matrix2, matrix1, [Tx, Ty, Tz])
+```
+
