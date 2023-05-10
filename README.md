@@ -1,5 +1,10 @@
 # 笔记
 
+
+## 渲染管线
+- vertexShader
+- fragmentShader
+
 ## shader传值的三种方式
 
 ![shader传值方式](./imgs/shader传值方式.png)
@@ -149,10 +154,6 @@ let rotate_matrix = [
 
 ```js
 import { mat4, glMatrix } from './gl_matrix/esm/index.js'
-
-
-// 第二种方式：修改某个矩阵，生成另外一个新的矩阵
-
 ```
 
 ### 使用
@@ -179,3 +180,17 @@ mat4.rotate(matrix2, matrix1, matrix, deg, [X, Y, Z])
 mat4.translate(matrix2, matrix1, [Tx, Ty, Tz])
 ```
 
+### 多个变换矩阵的组合
+
+```js
+let vertexShader = `
+attribute vec3 a_position;
+uniform mat4 u_tMatrix;
+uniform mat4 u_rMatrix;
+
+void main() {
+  mat4 modelMatrix =  u_tMatrix * u_rMatrix; // 从右到左执行变换矩阵
+  gl_Position = modelMatrix * vec4(a_position, 1.0);
+}
+`
+```
