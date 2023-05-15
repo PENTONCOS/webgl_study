@@ -194,3 +194,34 @@ void main() {
 }
 `
 ```
+
+
+## webgl贴图
+
+```js
+let texture = gl.createTexture()
+
+  let u_sampler = gl.getUniformLocation(gl.program, 'u_sampler')
+
+  let image = new Image()
+  image.src = './imgs/keyboard_1024x512.jpg'
+
+  image.onload = function () {
+    // 翻转图片的Y轴，默认是不翻转
+    // 因为canvas的坐标系和图片坐标系y轴是相反的
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
+
+    // 激活贴图，放在第0个单元上（最少可以支持8个单元）
+    gl.activeTexture(gl.TEXTURE0)
+    // 绑定贴图，参数：哪种贴图和哪个贴图
+    gl.bindTexture(gl.TEXTURE_2D, texture) 
+
+    // 对贴图的参数进行设置，gl.texParameteri(贴图的种类，参数的名称，具体值)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+
+    // 贴图用哪张图片，即用image作为texture
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+
+    gl.uniform1i(u_sampler, 0)
+  }
+```
