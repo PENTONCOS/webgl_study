@@ -81,7 +81,10 @@ function initVertexBuffers(gl) {
 
 draw(gl)
 
+// 这是一个报错
 throw new Error(1111)
+
+
 
 function draw(gl) {
   gl.clearColor(0.0, 0.0, 0.0, 1.0)
