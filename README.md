@@ -250,6 +250,44 @@ void main() {
 }
 `
 ```
-
 ## glsl, WebGL Shader Language
 
+- 区分大小写，以分号结尾，注释与js一致
+- 数据类型
+  - 简单类型
+    - 数字：int/float
+    - 布尔：bool
+  - 复杂类型
+    - 向量 Vevtor：vec2, vec3, vec4
+      * 例如：vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+        ```js
+        // 获取这个变量的部分值
+        color.x, color.y, color.z， color.w
+        color.r, color.g, color.b， color.a
+        color.s, color.t, color.p，color.q
+        ```
+    - 矩阵 Matrix：mat2, mat3, mat4
+      ```js
+      mat4 translateMatirx = mat4(
+      1.0, 0.0, 0.0, 0.0,
+      0.0, 1.0, 0.0, 0.0,
+      0.0, 0.0, 1.0, 0.0,
+      0.5, 0.0, 0.0, 1.0,
+      );
+      ```
+- 类型转换
+  - float(int), float(bool)
+  - int(float), init(bool)
+  - bool(int), bool(float)
+
+- 变量
+  - `gl_*`为内置属性，不允许设置自定义的值
+  - 声明：`数据类型 变量名  = 值;`
+- 计算
+  -  `+ - * /` 前后的类型一致
+  -  `++ -- += -= *= /=`
+- 循环语句
+- 条件语句
+- 函数
+  - 自定义函数
+  - 内置函数
