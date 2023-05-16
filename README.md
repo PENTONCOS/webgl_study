@@ -201,27 +201,34 @@ void main() {
 ```js
 let texture = gl.createTexture()
 
-  let u_sampler = gl.getUniformLocation(gl.program, 'u_sampler')
+let u_sampler = gl.getUniformLocation(gl.program, 'u_sampler')
 
-  let image = new Image()
-  image.src = './imgs/keyboard_1024x512.jpg'
+let image = new Image()
+image.src = './imgs/keyboard_1024x512.jpg'
 
-  image.onload = function () {
-    // 翻转图片的Y轴，默认是不翻转
-    // 因为canvas的坐标系和图片坐标系y轴是相反的
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
+image.onload = function () {
+  // 翻转图片的Y轴，默认是不翻转
+  // 因为canvas的坐标系和图片坐标系y轴是相反的 
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
 
-    // 激活贴图，放在第0个单元上（最少可以支持8个单元）
-    gl.activeTexture(gl.TEXTURE0)
-    // 绑定贴图，参数：哪种贴图和哪个贴图
-    gl.bindTexture(gl.TEXTURE_2D, texture) 
+  gl.activeTexture(gl.TEXTURE0)  //激活贴图，放在第0个单元上（最少可以支持8个单元）
+  gl.bindTexture(gl.TEXTURE_2D, texture) //绑定贴图：哪种贴图和哪个贴图
 
-    // 对贴图的参数进行设置，gl.texParameteri(贴图的种类，参数的名称，具体值)
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+  // 对贴图的参数进行设置gl.texParameteri(贴图的种类，参数的名称，具体值)
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR) // 大的图片贴到小的形状上去
+  // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST) // 大的图片贴到小的形状上去
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR) // 小的图片贴到大的形状上去
+  // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST) // 小的图片贴到大的形状上去
 
-    // 贴图用哪张图片，即用image作为texture
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+  // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+  // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+  // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
 
-    gl.uniform1i(u_sampler, 0)
-  }
+  // 贴图用哪张图片，即用image作为texture
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+
+  gl.uniform1i(u_sampler, 0)
+}
 ```
