@@ -316,3 +316,23 @@ void main() {
     - 类比成所看到的内容是在一个锥体内，有四个值约束：角度/长宽比/近处距离/远处距离
       - perspective(out, fovy, aspect, near, far)
     ![透视投影](./imgs/透视投影.png)
+
+- 深度测试
+
+gl.enable(gl.DEPTH_TEST)
+
+会引发`z-fighting`问题：当多个图形再同一平面上时，层级就无法区别。
+
+可以把两个图形分开画，相当于两种状态，然后给状态加上层级。
+
+```js
+gl.enable(gl.DEPTH_TEST)
+// Z-fighting
+gl.enable(gl.POLYGON_OFFSET_FILL)
+
+gl.polygonOffset(0.0, 0.0);
+gl.drawArrays(gl.TRIANGLES, 0, 3) // 蓝色的三角形
+gl.polygonOffset(1.0, 1.0);
+gl.drawArrays(gl.TRIANGLES, 3, 3) // 红色的三角形
+```
+
