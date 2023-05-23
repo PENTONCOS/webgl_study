@@ -299,4 +299,14 @@ void main() {
   - 相机位置
   - 相机看向中心
   - 相机在x，y, z轴方向上的位置
+  ```js
+  let viewMatrix = mat4.create()
+  let eye = [0, 0, 1]
+  let center = [0, 0, 0]
+  let up = [0, 1, 0]
+  mat4.lookAt(viewMatrix, eye, center, up)
+  ```
 - Projection矩阵
+  - 正交投影（Orthography）：为了解决视野超出1范围看不见的问题
+    - 类比成所能看到的内容是在一个立方体内，有六个值约束：left/right/bottom/top/near/far
+  - 透视投影（Perspective）
