@@ -308,5 +308,11 @@ void main() {
   ```
 - Projection矩阵
   - 正交投影（Orthography）：为了解决视野超出1范围看不见的问题
-    - 类比成所能看到的内容是在一个立方体内，有六个值约束：left/right/bottom/top/near/far
+    - 类比成所能看到的内容是在一个立方体内，有六个值约束：left/right/bottom/top/近处距离/远处距离
+      - ortho(out, left, right, bottom, top, near, far)
+    - 问题：没有近大远小，景深的概念。
+    ![正交投影](./imgs/正交投影.png)
   - 透视投影（Perspective）
+    - 类比成所看到的内容是在一个锥体内，有四个值约束：角度/长宽比/近处距离/远处距离
+      - perspective(out, fovy, aspect, near, far)
+    ![透视投影](./imgs/透视投影.png)
